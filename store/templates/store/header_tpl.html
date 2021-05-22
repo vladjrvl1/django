@@ -1,0 +1,28 @@
+{% load header %}
+{% block main_nav %}
+    <nav class="main_nav">
+        <ul>
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li class="hassubs">
+                <a href="categories.html">Categories</a>
+                <ul>
+                    {% for item in categories %}
+                        <li><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            </li>
+            <li class="hassubs">
+                <a href="#">Quick order</a>
+                <ul>
+                    <li>Lorem</li>
+                    <li><a href="#">+38(063)044-01-57</a></li>
+                    <li>Ipsum</li>
+                    <li><a href="#">+38(096)419-24-32</a></li>
+                    <li>Dolor</li>
+                    <li><a href="#">+38(050)510-80-02</a></li>
+                </ul>
+            </li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </nav>
+{% endblock %}
