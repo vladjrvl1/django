@@ -39,7 +39,7 @@ class Brand(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        pass
+        return reverse('smartphone', kwargs={"slug": self.slug})
 
 
 class Product(models.Model):
@@ -76,3 +76,12 @@ class Laptop(Product):
 
     def get_absolute_url(self):
         return reverse('laptop', kwargs={"slug": self.slug})
+
+    class Meta:
+        verbose_name = 'Ноутбук'
+        verbose_name_plural = 'Ноутбуки'
+
+class Slider(models.Model):
+    title = models.CharField(max_length=255, verbose_name='Название')
+    photo = models.ImageField(upload_to='sliders/%y/%m/%d', blank=True, null=True, name='Изображение')
+

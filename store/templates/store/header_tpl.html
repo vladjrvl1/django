@@ -4,7 +4,7 @@
         <ul>
             <li><a href="{% url 'home' %}">Home</a></li>
             <li class="hassubs">
-                <a href="categories.html">Categories</a>
+                <a href="#">Categories</a>
                 <ul>
                     {% for item in categories %}
                         <li><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></li>
