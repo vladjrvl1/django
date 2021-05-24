@@ -130,16 +130,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'mysite/static')
 ]
-
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_ROOT = os.path.join(BASE_DIR / 'media')
-MEDIA_URL = '/media/'
 
-INTERNAL_IPS = ['127.0.0.1']
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 EMAIL_USE_TLS = True
 EMAIL_USE_SSL = False
@@ -147,3 +149,7 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = '587'  #465
 EMAIL_HOST_USER = 'vladjrvl.work@gmail.com'
 EMAIL_HOST_PASSWORD = 'Prtscr00'
+
+
+import django_heroku
+django_heroku.settings(locals())
