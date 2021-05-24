@@ -1,1 +1,1 @@
-web: gunicorn smartmarket.wsgi
+web: gunicorn mysite.wsgi
