@@ -22,6 +22,9 @@ class SmartphoneAdmin(admin.ModelAdmin):
 class SliderAdmin(admin.ModelAdmin):
     pass
 
+@admin.register(NewsLetterRecipientEmail)
+class NewsLetterRecipientEmailAdmin(admin.ModelAdmin):
+    list_display = ("email", "created_at", )
 
 
 

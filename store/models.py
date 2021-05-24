@@ -53,6 +53,10 @@ class Product(models.Model):
     ram = models.PositiveSmallIntegerField(verbose_name='Оперативная память, Гб')
     memory = models.PositiveSmallIntegerField(verbose_name='Встроенная память, Гб')
     photo = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото', blank=True, null=True)
+    photo1 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото 1', blank=True, null=True)
+    photo2 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото 2', blank=True, null=True)
+    photo3 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото 3', blank=True, null=True)
+    photo4 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото 4', blank=True, null=True)
     price = models.PositiveIntegerField(verbose_name='Цена')
     views = models.IntegerField(default=0)
 
@@ -83,5 +87,13 @@ class Laptop(Product):
 
 class Slider(models.Model):
     title = models.CharField(max_length=255, verbose_name='Название')
-    photo = models.ImageField(upload_to='sliders/%y/%m/%d', blank=True, null=True, name='Изображение')
+    photo = models.ImageField(upload_to='sliders/%y/%m/%d', blank=True, null=True, verbose_name='Изображение слайдер')
+
+
+class NewsLetterRecipientEmail(models.Model):
+    email = models.EmailField(verbose_name='email', unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
 

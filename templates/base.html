@@ -33,22 +33,22 @@
     {% block ads %} <div class="avds">
         <div class="avds_container d-flex flex-lg-row flex-column align-items-start justify-content-between">
             <div class="avds_small">
-                <div class="avds_background" style="background-image:url(media/smartphones.jpg)"></div>
+                <div class="avds_background" style="background-image:url({{ cat_smartphone.photo.url }})"></div>
                 <div class="avds_small_inner">
                     <div class="avds_small_content">
                         <div class="avds_title">Smart Phones</div>
                         <div class="avds_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
-                        <div class="avds_link"><a href="categories.html">See More</a></div>
+                        <div class="avds_link"><a href="{{ cat_smartphone.get_absolute_url }}">See More</a></div>
                     </div>
                 </div>
             </div>
             <div class="avds_large">
-                <div class="avds_background" style="background-image:url({% static 'images/notebooks 2to1.jpeg' %})"></div>
+                <div class="avds_background" style="background-image:url({{ cat_laptop.photo.url }})"></div>
                 <div class="avds_large_container">
                     <div class="avds_large_content">
                         <div class="avds_title">Notebooks</div>
                         <div class="avds_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam a ultricies metus. Sed nec molestie eros. Sed viver ra velit venenatis fermentum luctus.</div>
-                        <div class="avds_link avds_link_large"><a href="categories.html">See More</a></div>
+                        <div class="avds_link avds_link_large"><a href="{{ cat_laptop.get_absolute_url }}">See More</a></div>
                     </div>
                 </div>
             </div>
@@ -59,10 +59,10 @@
     {% block products %} {% endblock %}
 
     <!-- Icon Boxes -->
-    {% include 'inc/_iconboxes.html' %}
+    {% block iconboxes %} {% include 'inc/_iconboxes.html' %} {% endblock %}
 
     <!-- Newsletter -->
-    {% include 'inc/_newsletter.html' %}
+    {% block newsletter %}{% include 'inc/_newsletter.html' %} {% endblock %}
 
     <!-- Footer -->
     <div class="footer_overlay"></div>
@@ -72,19 +72,12 @@
 
 
 {% block scripts %}
-    <script src="{% static 'js/jquery-3.2.1.min.js'  %}"></script>
-    <script src="{% static 'styles/bootstrap4/popper.js'  %}"></script>
-    <script src="{% static 'styles/bootstrap4/bootstrap.min.js'  %}"></script>
-    <script src="{% static 'plugins/greensock/TweenMax.min.js'  %}"></script>
-    <script src="{% static 'plugins/greensock/TimelineMax.min.js'  %}"></script>
-    <script src="{% static 'plugins/scrollmagic/ScrollMagic.min.js'  %}"></script>
-    <script src="{% static 'plugins/greensock/animation.gsap.min.js' %}"></script>
-    <script src="{% static 'plugins/greensock/ScrollToPlugin.min.js' %}"></script>
-    <script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
-    <script src="{% static 'plugins/Isotope/isotope.pkgd.min.js' %}"></script>
-    <script src="{% static 'plugins/easing/easing.js' %}"></script>
-    <script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
-    <script src="{% static 'js/custom.js' %}"></script>
+
 {% endblock %}
 </body>
 </html>
+
+
+
+
+

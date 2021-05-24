@@ -1,8 +1,6 @@
 {% extends 'store/index.html' %}
 {% load static %}
-{% block title %}
-    {{ category.title }} {{ block.super }}
-{% endblock %}
+{% block title %} Search {{ block.super }} {% endblock %}
 {% block styles %}
     {{ block.super }}
     <link rel="stylesheet" type="text/css" href="{% static 'styles/categories.css'%}">
@@ -10,30 +8,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'styles/my_styles.css'%}">
 {% endblock %}
 
-
-{% block home %} <div class="home">
-    <div class="home_container">
-        <div class="home_background" style="background-image:url({{ category.photo.url }})"></div>
-        <div class="home_content_container">
-            <div class="container">
-                <div class="row">
-                    <div class="col">
-                        <div class="home_content">
-                            <div class="home_title">{% block home_title %} {{ category.title }} {% endblock %}<span>.</span></div>
-                            <div class="home_text"><p>{{ category.content }}</p></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% endblock %}
-
-{% block ads %}  {% endblock %}
-
+{% block home %} {% endblock %}
+{% block ads %} {% endblock %}
 <!-- Products -->
-
 {% block products %}
     <div class="products">
         <div class="container">
@@ -75,16 +52,38 @@
                             </div>
                         {% endfor %}
                     </div>
-                    {% include 'inc/_pagination.html' %}
+                    {% if page_obj.has_other_pages %}
+                        <div class="paginate wrapper">
+                            <ul>
+                                {% if page_obj.has_previous %}
+                                    <li><a href="?{{ q }}{{ page_obj.previous_page_number }}">&lang;</a></li>
+                                {% endif %}
+                                {% for p in page_obj.paginator.page_range %}
+                                    {% if page_obj.number == p %}
+                                        <li><a href="?{{ q }}{{ p }}">{{ p }}</a></li>
+                                    {% elif p > page_obj.number|add:-4 and p < page_obj.number|add:4  %}
+                                        <li><a href="?{{ q }}{{ p }}">{{ p }}</a></li>
+                                    {% endif %}
+                                {% endfor %}
+                                {% if page_obj.has_next %}
+                                    <li><a href="?{{ q }}{{ page_obj.next_page_number }}">&rang;</a></li>
+                                    {#                                    <li><a href="?page={{ page_obj.next_page_number }}">&rang;</a></li>#}
+                                {% endif %}
+
+                                {# <li><a href="" class="inactive">2</a></li>#}
+                                {#li><a href="" class="active">4</a></li>#}
+                                {#<li><a href="" class="more">&hellip;</a></li>#}
+                                {#<li><a href="">&rang;</a></li>#}
+                            </ul>
+                        </div>
+                    {% endif %}
                 </div>
             </div>
         </div>
     </div>
 {% endblock %}
+{% block iconboxes %} {% endblock %}
+{% block newsletter %} {% endblock %}
 
-
-
-
-
-{% block scripts %} {{ block.super }} <script src="{% static 'js/custom.js' %}"></script> <script src="{% static 'js/categories.js' %}"></script> {% endblock %}
+{% block scripts %} {{ block.super }}     <script src="{% static 'js/categories.js' %}"></script> <script src="{% static 'js/categories.js' %}"></script> {% endblock %}
 

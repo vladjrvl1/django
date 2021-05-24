@@ -944,8 +944,9 @@ section
 }
 .in_stock_container
 {
-	margin-top: 22px;
+	margin-top: 12px;
 }
+
 .availability
 {
 	display: inline-block;
@@ -961,6 +962,8 @@ section
 	color: #44a038;
 	margin-left: 5px;
 }
+
+
 .details_name
 {
 	font-size: 24px;

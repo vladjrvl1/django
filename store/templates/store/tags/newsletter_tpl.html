@@ -1,0 +1,5 @@
+<form action="{% url 'newsletter' %}" id="newsletter_form" class="newsletter_form" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button class="newsletter_button trans_200" type="submit"><span>Subscribe</span></button>
+</form>
