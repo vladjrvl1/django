@@ -9,20 +9,15 @@ class CategoryAdmin(admin.ModelAdmin):
 class BrandAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('title',)}
 
-@admin.register(Laptop)
+@admin.register(Device)
 class LaptopAdmin(admin.ModelAdmin):
     prepopulated_fields = {"slug": ('title',)}
-
-@admin.register(Smartphone)
-class SmartphoneAdmin(admin.ModelAdmin):
-    prepopulated_fields = {"slug": ('title',)}
-    save_as = True
 
 @admin.register(Slider)
 class SliderAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(NewsLetterRecipientEmail)
+@admin.register(NewsletterRecipientEmail)
 class NewsLetterRecipientEmailAdmin(admin.ModelAdmin):
     list_display = ("email", "created_at", )
 

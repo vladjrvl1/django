@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
-from store.models import NewsLetterRecipientEmail
+from store.models import NewsletterRecipientEmail
 # from captcha.fields import CaptchaField, CaptchaTextInput
 
 
@@ -43,7 +43,7 @@ class ContactForm(forms.Form):
 ''' Решить вопрос сохранения уникальных email-ов в БД '''
 class NewsLetterForm(forms.ModelForm):
     class Meta:
-        model = NewsLetterRecipientEmail
+        model = NewsletterRecipientEmail
         fields = ("email", )
         widgets = {
             "email": forms.EmailInput(attrs={"class": "newsletter_input", "placeholder": "Your Email"})

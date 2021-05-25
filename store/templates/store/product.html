@@ -13,7 +13,7 @@
 
 {% block home %} <div class="home">
     <div class="home_container">
-        <div class="home_background" style="background-image:url({{ category.photo.url }})"></div>
+        <div class="home_background" style="background-image:url({{ device.category.photo.url }})"></div>
         <div class="home_content_container">
             <div class="container">
                 <div class="row">
@@ -42,12 +42,12 @@
                 <!-- Product Image -->
                 <div class="col-lg-6">
                     <div class="details_image">
-                        <div class="details_image_large"><img src="{{ product.photo.url }}" alt=""></div>
+                        <div class="details_image_large"><img src="{{ device.photo.url }}" alt=""></div>
                         <div class="details_image_thumbnails d-flex flex-row align-items-start justify-content-between">
-                            <div class="details_image_thumbnail" data-image="{{ product.photo.url }}"><img src="{{ product.photo.url }}" alt=""></div>
-                            <div class="details_image_thumbnail" data-image="{{ product.photo1.url }}"><img src="{{ product.photo1.url }}" alt=""></div>
-                            <div class="details_image_thumbnail" data-image="{{ product.photo2.url }}"><img src="{{ product.photo2.url }}" alt=""></div>
-                            <div class="details_image_thumbnail" data-image="{{ product.photo3.url }}"><img src="{{ product.photo3.url }}" alt=""></div>
+                            <div class="details_image_thumbnail" data-image="{{ device.photo.url }}"><img src="{{ device.photo.url }}" alt=""></div>
+                            <div class="details_image_thumbnail" data-image="{{ device.photo1.url }}"><img src="{{ device.photo1.url }}" alt=""></div>
+                            <div class="details_image_thumbnail" data-image="{{ device.photo2.url }}"><img src="{{ device.photo2.url }}" alt=""></div>
+                            <div class="details_image_thumbnail" data-image="{{ device.photo3.url }}"><img src="{{ device.photo3.url }}" alt=""></div>
                         </div>
                     </div>
                 </div>
@@ -55,8 +55,8 @@
                 <!-- Product Content -->
                 <div class="col-lg-6">
                     <div class="details_content">
-                        <div class="details_name">{{ product.title }}</div>
-                        <div class="details_price">${{ product.price }}</div>
+                        <div class="details_name">{{ device.title }}</div>
+                        <div class="details_price">${{ device.price }}</div>
 
                         <!-- In Stock -->
                         <div class="in_stock_container">
@@ -65,10 +65,10 @@
                         </div>
                         <div class="in_stock_container">
                             <div class="availability">Category:</div>
-                            <span class="attribute">{{ product.category }}</span>
+                            <span class="attribute">{{ device.category }}</span>
                         </div>
                         <div class="details_text">
-                            <p>{{ product.content }}</p>
+                            <p>{{ device.content }}</p>
                         </div>
 
                         <!-- Product Quantity -->
@@ -110,7 +110,7 @@
                 <div class="col">
                     <div class="product_grid">
                         <!-- Product -->
-                        {% for item in products %}
+                        {% for item in related_products %}
                             <div class="product">
                                 <div class="product_image"><img src="{{ item.photo.url }}" alt="{{ item.title }}" height="200"></div>
                                 <div class="product_content">

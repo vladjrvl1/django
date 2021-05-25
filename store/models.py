@@ -48,10 +48,6 @@ class Product(models.Model):
     category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='Категория')
     brand = models.ForeignKey(Brand, on_delete=models.PROTECT, verbose_name='Бренд')
     content = models.TextField(blank=True, null=True, verbose_name='Описание')
-    screen_size = models.CharField(max_length=50, verbose_name='Размер экрана')
-    screen_resolution = models.CharField(max_length=50, verbose_name='Разрешение экрана')
-    ram = models.PositiveSmallIntegerField(verbose_name='Оперативная память, Гб')
-    memory = models.PositiveSmallIntegerField(verbose_name='Встроенная память, Гб')
     photo = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото', blank=True, null=True)
     photo1 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото 1', blank=True, null=True)
     photo2 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото 2', blank=True, null=True)
@@ -67,19 +63,17 @@ class Product(models.Model):
         abstract = True
 
 
-class Smartphone(Product):
-    sim_amount = models.IntegerField(verbose_name='Количество SIM-карт')
-
-    def get_absolute_url(self):
-        return reverse('smartphone', kwargs={"slug": self.slug})
-
-
-class Laptop(Product):
+class Device(Product):
+    screen_size = models.CharField(max_length=50, verbose_name='Размер экрана')
+    screen_resolution = models.CharField(max_length=50, verbose_name='Разрешение экрана')
+    ram = models.PositiveSmallIntegerField(verbose_name='Оперативная память, Гб')
+    memory = models.PositiveSmallIntegerField(verbose_name='Встроенная память, Гб')
     gpu = models.CharField(max_length=255, verbose_name='Видеокарта')
     cpu = models.CharField(max_length=255, verbose_name='Процессор')
 
     def get_absolute_url(self):
-        return reverse('laptop', kwargs={"slug": self.slug})
+        # return reverse('product', kwargs={'category_slug': self.category.slug, 'slug': self.slug})
+        return reverse('product', args=[self.category.slug, self.slug])
 
     class Meta:
         verbose_name = 'Ноутбук'
@@ -90,7 +84,7 @@ class Slider(models.Model):
     photo = models.ImageField(upload_to='sliders/%y/%m/%d', blank=True, null=True, verbose_name='Изображение слайдер')
 
 
-class NewsLetterRecipientEmail(models.Model):
+class NewsletterRecipientEmail(models.Model):
     email = models.EmailField(verbose_name='email', unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
