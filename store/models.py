@@ -15,9 +15,9 @@ title, slug, category, brand, content, screen_size, screen_resolution, ram, phot
 
 
 class Category(models.Model):
-    title = models.CharField(max_length=255, verbose_name='Название')
+    title = models.CharField(max_length=255, verbose_name='Title')
     slug = models.SlugField(max_length=255, verbose_name='URL')
-    content = models.TextField(blank=True, null=True, verbose_name='Описание')
+    content = models.TextField(blank=True, null=True, verbose_name='Content')
     photo = models.ImageField(upload_to='categories/%y/%m/%d', blank=True, null=True)
 
     def get_absolute_url(self):
@@ -27,12 +27,12 @@ class Category(models.Model):
         return self.title
 
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
         ordering = ['title']
 
 class Brand(models.Model):
-    title = models.CharField(max_length=255, verbose_name='Бренд')
+    title = models.CharField(max_length=255, verbose_name='Brand')
     slug = models.SlugField(max_length=255, unique=True, verbose_name='URL')
 
     def __str__(self):
@@ -43,18 +43,18 @@ class Brand(models.Model):
 
 
 class Product(models.Model):
-    title = models.CharField(max_length=255, verbose_name='Название')
+    title = models.CharField(max_length=255, verbose_name='Title')
     slug = models.SlugField(max_length=255, unique=True, verbose_name='URL')
-    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='Категория')
-    brand = models.ForeignKey(Brand, on_delete=models.PROTECT, verbose_name='Бренд')
-    content = models.TextField(blank=True, null=True, verbose_name='Описание')
-    photo = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото', blank=True, null=True)
-    photo1 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото 1', blank=True, null=True)
-    photo2 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото 2', blank=True, null=True)
-    photo3 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото 3', blank=True, null=True)
-    photo4 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Фото 4', blank=True, null=True)
-    price = models.PositiveIntegerField(verbose_name='Цена')
-    views = models.IntegerField(default=0)
+    category = models.ForeignKey(Category, on_delete=models.PROTECT, verbose_name='Category')
+    brand = models.ForeignKey(Brand, on_delete=models.PROTECT, verbose_name='Brand')
+    content = models.TextField(blank=True, null=True, verbose_name='Content')
+    photo = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Photo', blank=True, null=True)
+    photo1 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Photo 1', blank=True, null=True)
+    photo2 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Photo 2', blank=True, null=True)
+    photo3 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Photo 3', blank=True, null=True)
+    photo4 = models.ImageField(upload_to='products/%y/%m/%d/', verbose_name='Photo 4', blank=True, null=True)
+    price = models.PositiveIntegerField(verbose_name='Price')
+    views = models.IntegerField(default=0, verbose_name='Views')
 
     def __str__(self):
         return self.title
@@ -64,24 +64,24 @@ class Product(models.Model):
 
 
 class Device(Product):
-    screen_size = models.CharField(max_length=50, verbose_name='Размер экрана')
-    screen_resolution = models.CharField(max_length=50, verbose_name='Разрешение экрана')
-    ram = models.PositiveSmallIntegerField(verbose_name='Оперативная память, Гб')
-    memory = models.PositiveSmallIntegerField(verbose_name='Встроенная память, Гб')
-    gpu = models.CharField(max_length=255, verbose_name='Видеокарта')
-    cpu = models.CharField(max_length=255, verbose_name='Процессор')
+    screen_size = models.CharField(max_length=50, verbose_name='Screen size')
+    screen_resolution = models.CharField(max_length=50, verbose_name='Screen Resolution')
+    ram = models.PositiveSmallIntegerField(verbose_name='RAM, Gb')
+    memory = models.PositiveSmallIntegerField(verbose_name='Memory, Gb')
+    gpu = models.CharField(max_length=255, verbose_name='GPU')
+    cpu = models.CharField(max_length=255, verbose_name='CPU')
 
     def get_absolute_url(self):
         # return reverse('product', kwargs={'category_slug': self.category.slug, 'slug': self.slug})
         return reverse('product', args=[self.category.slug, self.slug])
 
     class Meta:
-        verbose_name = 'Ноутбук'
-        verbose_name_plural = 'Ноутбуки'
+        verbose_name = 'Laptop'
+        verbose_name_plural = 'Laptops'
 
 class Slider(models.Model):
-    title = models.CharField(max_length=255, verbose_name='Название')
-    photo = models.ImageField(upload_to='sliders/%y/%m/%d', blank=True, null=True, verbose_name='Изображение слайдер')
+    title = models.CharField(max_length=255, verbose_name='Title')
+    photo = models.ImageField(upload_to='sliders/%y/%m/%d', blank=True, null=True, verbose_name='Slider image')
 
 
 class NewsletterRecipientEmail(models.Model):
