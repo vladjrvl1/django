@@ -4,6 +4,8 @@ from django.db.models import F
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from django.views.generic import ListView, DetailView, CreateView
+
+from cart.forms import CartAddProductForm
 from .models import *
 from .forms import ContactForm, NewsLetterForm
 
@@ -48,13 +50,12 @@ class ProductView(DetailView):
     def get_context_data(self, **kwargs):
         context = super(ProductView, self).get_context_data(**kwargs)
         context['related_products'] = Device.objects.all().order_by('views')[:8]
+        context['cart_product_form'] = CartAddProductForm()
         self.object.views = F('views') + 1
         self.object.save()
         self.object.refresh_from_db()
         return context
 
-def cart(request):
-    return render(request, 'store/cart.html')
 
 def checkout(request):
     return render(request, 'store/checkout.html')

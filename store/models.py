@@ -1,5 +1,5 @@
 from django.db import models
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 '''
 Categories: 
@@ -73,11 +73,13 @@ class Device(Product):
 
     def get_absolute_url(self):
         # return reverse('product', kwargs={'category_slug': self.category.slug, 'slug': self.slug})
-        return reverse('product', args=[self.category.slug, self.slug])
+        # return reverse('product', args=[self.id, ])
+        # return reverse_lazy('product', kwargs={"slug": self.slug})
+        return reverse('product', kwargs={"slug": self.slug})
 
     class Meta:
-        verbose_name = 'Laptop'
-        verbose_name_plural = 'Laptops'
+        verbose_name = 'Device'
+        verbose_name_plural = 'Devices'
 
 class Slider(models.Model):
     title = models.CharField(max_length=255, verbose_name='Title')

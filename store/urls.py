@@ -4,11 +4,10 @@ from .views import *
 urlpatterns = [
     path('', Home.as_view(), name='home'),
     path('category/<str:slug>/', CategoryView.as_view(), name='category'),
-    # path('category/<str:slug>', ProductView.as_view(), name='product'),
-    path(r'^category/(?P<category_slug>[-\w]+)/(?P<slug>[-\w]+)/$', ProductView.as_view(), name='product'),  # лишние символы в Url
+    path('category/<str:slug>', ProductView.as_view(), name='product'),
+    # path(r'^category/(?P<category_slug>[-\w]+)/(?P<slug>[-\w]+)/$', ProductView.as_view(), name='product'),  # лишние символы в Url
     path('search/', SearchView.as_view(), name='search'),
     path('contact/', contact, name='contact'),
-    path('cart/', cart, name='cart'),
     path('newsletter/', NewsletterView.as_view(), name='newsletter'),
     path('checkout/', checkout, name='checkout'),
 
