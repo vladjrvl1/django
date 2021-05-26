@@ -1,4 +1,6 @@
 __pychache__/
+gg/
 venv/
+migrts/
 *.pyc
 db — копия.sqlite3
