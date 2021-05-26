@@ -154,3 +154,8 @@ class Cart(object):
         # очищаем корзину в сессии
         del self.session[settings.CART_SESSION_ID]
         self.save()
+
+    def len(self):
+        product_slugs = self.cart.keys()
+        products = Product.objects.filter(slug__in=product_slugs)
+        return len(products)
