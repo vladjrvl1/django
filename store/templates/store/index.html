@@ -2,9 +2,14 @@
 {% load static %}
 {% block title %} {{ title }} || {{ block.super }} {% endblock %}
 {% block products %} <div class="products">
+
     <div class="container">
         <div class="row">
             <div class="col">
+                <div class="col text-center">
+                    <div class="newsletter_title">Latest products</div>
+                </div>
+                <hr> <br>
                 <div class="product_grid">
                     {% for item in devices %}
                         <div class="product">
@@ -15,7 +20,7 @@
                                 <br>
                                 <form action="{% url 'cart:cart_add' item.slug %}" method="post">
                                     {% csrf_token %}
-                                                                        {{ cart_product_form.quantity }}
+                                    {{ cart_product_form.quantity }}
                                     <input type="submit" value="Add to cart">
                                 </form>
                             </div>
