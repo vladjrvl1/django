@@ -105,6 +105,7 @@ def mass_mail(request):
 
 
 def contact(request):
+    categories = Category.objects.all()
     if request.method == "POST":
         form = ContactForm(request.POST)
         if form.is_valid():
@@ -121,7 +122,7 @@ def contact(request):
             messages.error(request, 'Ошибка валидации')
     else:
         form = ContactForm()
-    return render(request, 'store/contact.html', context={"form": form})
+    return render(request, 'store/contact.html', context={"form": form, 'categories': categories })
 
 
 class NewsletterView(CreateView):
