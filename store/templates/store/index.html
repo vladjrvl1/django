@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block title %} {{ title }} || {{ block.super }} {% endblock %}
+
+{% include 'inc/_menu.html' %}
+
 {% block products %} <div class="products">
 
     <div class="container">

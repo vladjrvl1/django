@@ -28,6 +28,10 @@ class Home(ListView):
 
         return context
 
+class CategoriesListView(ListView):
+    model = Category
+    template_name = 'store/categorieslist.html'
+
 
 class CategoryView(ListView):
     model = Category

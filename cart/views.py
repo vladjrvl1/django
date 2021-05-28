@@ -37,7 +37,7 @@
 ''' slug '''
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.decorators.http import require_POST
-from store.models import Device as Product
+from store.models import Device as Product, Category
 from .cart import Cart
 from .forms import CartAddProductForm
 
@@ -65,8 +65,9 @@ def cart_remove(request, product_slug):
 
 def cart_detail(request):
     cart = Cart(request)
+    categories = Category.objects.all()
     for item in cart:
         item['update_quantity_form'] = CartAddProductForm(initial={'quantity': item['quantity'],
                                                                    'update': True})
-    return render(request, 'cart/cart.html', {'cart': cart})
+    return render(request, 'cart/cart.html', {'cart': cart, 'categories': categories})
 

@@ -18,7 +18,7 @@
                     </ul>
                 </li>
                 <li class="page_menu_item has-children menu_mm">
-                    <a href="#">Categories<i class="fa fa-angle-down"></i></a>
+                    <a href="{% url 'categories' %}#">Categories<i class="fa fa-angle-down"></i></a>
                     <ul class="page_menu_selection menu_mm">
                         {% for obj in categories %}
                             <li class="page_menu_item menu_mm"><a href="{{ obj.get_absolute_url }}">{{ obj.title }}<i class="fa fa-angle-down"></i></a></li>

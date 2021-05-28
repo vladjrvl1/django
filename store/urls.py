@@ -3,6 +3,7 @@ from .views import *
 
 urlpatterns = [
     path('', Home.as_view(), name='home'),
+    path('categories/', CategoriesListView.as_view(), name='categories'),
     path('category/<str:slug>/', CategoryView.as_view(), name='category'),
     path('category/<str:slug>', ProductView.as_view(), name='product'),
     # path(r'^category/(?P<category_slug>[-\w]+)/(?P<slug>[-\w]+)/$', ProductView.as_view(), name='product'),  # лишние символы в Url
@@ -11,7 +12,6 @@ urlpatterns = [
     path('newsletter/', NewsletterView.as_view(), name='newsletter'),
     path('checkout/', checkout, name='checkout'),
     path('massmail', mass_mail, name='massmail'),
-
 
 ]
 
