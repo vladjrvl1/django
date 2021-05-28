@@ -53,6 +53,7 @@ def cart_add(request, product_slug):
                  quantity=cd['quantity'],
                  update_quantity=cd['update'])
     return redirect('cart:cart_detail')
+    # return redirect('cart:cart_detail')
 
 
 def cart_remove(request, product_slug):

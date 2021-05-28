@@ -10,6 +10,7 @@ urlpatterns = [
     path('contact/', contact, name='contact'),
     path('newsletter/', NewsletterView.as_view(), name='newsletter'),
     path('checkout/', checkout, name='checkout'),
+    path('massmail', mass_mail, name='massmail'),
 
 
 ]

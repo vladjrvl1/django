@@ -4,10 +4,11 @@ from django.db.models import F
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpRequest
 from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic.edit import ProcessFormView
 
 from cart.forms import CartAddProductForm
 from .models import *
-from .forms import ContactForm, NewsLetterForm
+from .forms import ContactForm, SubscriberEmailForm, MassMailForm
 
 
 class Home(ListView):
@@ -23,6 +24,8 @@ class Home(ListView):
         context['sliders'] = Slider.objects.all()
         context['cat_laptops'] = Category.objects.get(slug='laptops') # сделать тоже самое в шаблоне???
         context['cat_smartphones'] = Category.objects.get(slug='smartphones')
+        context['cart_product_form'] = CartAddProductForm()
+
         return context
 
 
@@ -35,6 +38,7 @@ class CategoryView(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['category'] = Category.objects.get(slug=self.kwargs['slug'])
+        context['cart_product_form'] = CartAddProductForm()
         return context
 
     def get_queryset(self):
@@ -56,9 +60,48 @@ class ProductView(DetailView):
         self.object.refresh_from_db()
         return context
 
-
 def checkout(request):
     return render(request, 'store/checkout.html')
+
+def mass_mail(request):
+    if request.method == "POST":
+        form = MassMailForm(request.POST)
+        if form.is_valid():
+            recipients = [obj.email for obj in SubscriberEmail.objects.all()]
+            mail = send_mail(form.cleaned_data['subject'], form.cleaned_data['message'],
+                             'vladjrvl.work@gmail.com', recipients)
+            if mail:
+                messages.success(request, 'Письмо отправлено')
+                return redirect('massmail')
+            else:
+                messages.error(request, 'Ошибка отправки')
+        else:
+            messages.error(request, 'Ошибка валидации')
+    else:
+        form = MassMailForm()
+    return render(request, 'store/mass_mail.html', {'form': form})
+
+
+# class SendMassMail(ProcessFormView):
+#     recipients = [obj.email for obj in SubscriberEmail.objects.all()]
+#
+#     def get(self, request, *args, **kwargs):
+#         form = MassMailForm()
+#         return form
+#
+#     def post(self, request, *args, **kwargs):
+#         form = MassMailForm(request.POST)
+#         if form.is_valid():
+#             mail = send_mail(form.cleaned_data['subject'], form.cleaned_data['message'], 'vladjrvl.work@gmail.com',
+#                              self.recipients, fail_silently=False)
+#             if mail:
+#                 messages.success(request, 'Письмо отправлено')
+#                 return redirect('contact')
+#             else:
+#                 return messages.error(request, 'Ошибка отправки')
+#         else:
+#             return messages.error(request, 'Ошибка валидации')
+
 
 
 def contact(request):
@@ -82,8 +125,8 @@ def contact(request):
 
 
 class NewsletterView(CreateView):
-    model = NewsletterRecipientEmail
-    form_class = NewsLetterForm
+    model = SubscriberEmail
+    form_class = SubscriberEmailForm
     success_url = '/'
 
 
@@ -102,4 +145,9 @@ class SearchView(ListView):
         context = super().get_context_data(*args, **kwargs)
         context["q"] = f'q={self.request.GET.get("q")}&'
         return context
+
+
+
+def auth(request):
+    return render(request, 'oauth.html')
 

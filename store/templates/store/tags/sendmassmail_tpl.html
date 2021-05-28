@@ -1,0 +1,5 @@
+<form action="{% url 'massmail' %}" id="newsletter_form" class="newsletter_form" method="post">
+    {% csrf_token %}
+    {{ form }}
+    <button class="button contact_button" type="submit"><span>Send</span></button>
+</form>

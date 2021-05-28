@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 
-from store.models import NewsletterRecipientEmail
+from store.models import SubscriberEmail
 # from captcha.fields import CaptchaField, CaptchaTextInput
 
 
@@ -41,9 +41,9 @@ class ContactForm(forms.Form):
 
 ''' Email рассылка'''
 ''' Решить вопрос сохранения уникальных email-ов в БД '''
-class NewsLetterForm(forms.ModelForm):
+class SubscriberEmailForm(forms.ModelForm):
     class Meta:
-        model = NewsletterRecipientEmail
+        model = SubscriberEmail
         fields = ("email", )
         widgets = {
             "email": forms.EmailInput(attrs={"class": "newsletter_input", "placeholder": "Your Email"})
@@ -51,3 +51,8 @@ class NewsLetterForm(forms.ModelForm):
         labels = {
             "email": ''
         }
+
+
+class MassMailForm(forms.Form):
+    subject = forms.CharField(label='Subject', widget=forms.TextInput(attrs={'class': "contact_input"}))
+    message = forms.CharField(label='Message', widget=forms.Textarea(attrs={'class': "contact_input contact_textarea"}))

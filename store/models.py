@@ -86,7 +86,7 @@ class Slider(models.Model):
     photo = models.ImageField(upload_to='sliders/%y/%m/%d', blank=True, null=True, verbose_name='Slider image')
 
 
-class NewsletterRecipientEmail(models.Model):
+class SubscriberEmail(models.Model):
     email = models.EmailField(verbose_name='email', unique=True)
     created_at = models.DateTimeField(auto_now_add=True)
 

@@ -12,6 +12,12 @@
                             <div class="product_content">
                                 <div class="product_title"><a href="{{ item.get_absolute_url }}">{{ item.title }}</a></div>
                                 <div class="product_price">₴{{ item.price }}</div>
+                                <br>
+                                <form action="{% url 'cart:cart_add' item.slug %}" method="post">
+                                    {% csrf_token %}
+                                                                        {{ cart_product_form.quantity }}
+                                    <input type="submit" value="Add to cart">
+                                </form>
                             </div>
                         </div>
                     {% endfor %}

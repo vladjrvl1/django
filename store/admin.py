@@ -30,7 +30,7 @@ class BrandAdmin(admin.ModelAdmin):
 class SliderAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(NewsletterRecipientEmail)
+@admin.register(SubscriberEmail)
 class NewsLetterRecipientEmailAdmin(admin.ModelAdmin):
     list_display = ("email", "created_at", )
 
