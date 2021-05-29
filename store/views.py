@@ -15,7 +15,7 @@ class Home(ListView):
     model = Device
     template_name = 'store/index.html'
     context_object_name = 'devices'
-    paginate_by = 12
+    paginate_by = 10
     form = ContactForm()
 
     def get_context_data(self, *, object_list=None, **kwargs):
@@ -31,11 +31,12 @@ class Home(ListView):
 class CategoriesListView(ListView):
     model = Category
     template_name = 'store/categorieslist.html'
+    context_object_name = 'categories'
 
 
 class CategoryView(ListView):
     model = Category
-    paginate_by = 12
+    paginate_by = 10
     context_object_name = 'products'
     template_name = 'store/category.html'
 
